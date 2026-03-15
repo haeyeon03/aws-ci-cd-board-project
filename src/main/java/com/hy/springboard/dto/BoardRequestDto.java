@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BoardRequestDto {
 
+    private Long id;
     private String title;
     private String content;
     private String writer;
 }
+

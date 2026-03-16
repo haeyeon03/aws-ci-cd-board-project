@@ -22,7 +22,7 @@ public class BoardController {
      */
     @PostMapping
     public void createBoard(@RequestBody  BoardRequestDto dto) {
-        boardService.createdBoard(dto);
+        boardService.createBoard(dto);
     }
 
     /**
@@ -34,5 +34,16 @@ public class BoardController {
     public List<BoardResponseDto> getBoards(){
         return boardService.getBoards();
 
+    }
+
+    /**
+     * 게시글 단건 조회 API
+     *
+     * @param id
+     * @return 게시글
+     */
+    @GetMapping("/{id}")
+    public BoardResponseDto getBoard(@PathVariable long id){
+        return boardService.getBoard(id);
     }
 }

@@ -26,4 +26,9 @@ public class Board {
         this.writer = writer;
     }
 
+    public void update(String title, String content, String writer) {
+        this.title = title;
+        this.content = content;
+        this.writer = writer;
+    }
 }

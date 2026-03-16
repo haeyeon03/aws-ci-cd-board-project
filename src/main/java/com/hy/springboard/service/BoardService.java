@@ -4,6 +4,7 @@ import com.hy.springboard.dto.BoardRequestDto;
 import com.hy.springboard.dto.BoardResponseDto;
 import com.hy.springboard.entity.Board;
 import com.hy.springboard.repository.BoardRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -62,5 +63,24 @@ public class BoardService {
                 .orElseThrow(() -> new RuntimeException("게시글이 없습니다."));
         BoardResponseDto dto = new BoardResponseDto(board);
         return dto;
+    }
+
+    /**
+     * 게시글 수정 서비스 로직
+     *
+     * @param dto (id,title,content,writer)
+     * @return 1 : 수정 성공, 0 : 수정 실패
+     */
+    @Transactional
+    public int updateBoard(BoardRequestDto dto) {
+        Board board = boardRepository.findById(dto.getId())
+                .orElseThrow(()->new RuntimeException("게시글이 없습니다."));
+
+        board.update(
+                dto.getTitle(),
+                dto.getContent(),
+                dto.getWriter()
+        );
+        return 1;
     }
 }

@@ -18,7 +18,7 @@ public class BoardController {
     /**
      * 게시글 생성 API
      *
-     * @param dto (title,content,writer)
+     * @param dto (id,title,content,writer)
      */
     @PostMapping
     public void createBoard(@RequestBody  BoardRequestDto dto) {
@@ -45,5 +45,18 @@ public class BoardController {
     @GetMapping("/{id}")
     public BoardResponseDto getBoard(@PathVariable long id){
         return boardService.getBoard(id);
+    }
+
+
+    /**
+     * 게시글 수정 API
+     *
+     * @param dto (id,title,content,writer)
+     * @return 1 : 수정 성공, 0 : 수정 실패
+     */
+    @PutMapping("/{id}")
+    public int updateBoard(@PathVariable long id,@RequestBody BoardRequestDto dto){
+        dto.setId(id);
+        return boardService.updateBoard(dto);
     }
 }

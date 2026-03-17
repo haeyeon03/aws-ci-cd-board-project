@@ -83,4 +83,19 @@ public class BoardService {
         );
         return 1;
     }
+
+
+    /**
+     * 게시글 삭제 서비스 로직
+     *
+     * @param id
+     * @return 1 : 수정 성공 / 0 : 수정 실패
+     */
+    public int deleteBoard(long id) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("게시글이 없습니다."));
+
+        boardRepository.delete(board);
+        return 1;
+    }
 }

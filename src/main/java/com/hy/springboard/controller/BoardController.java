@@ -59,4 +59,15 @@ public class BoardController {
         dto.setId(id);
         return boardService.updateBoard(dto);
     }
+
+    /**
+     * 게시글 삭제 API
+     *
+     * @param id
+     * @return 1 : 수정 성공 / 0 : 수정 실패
+     */
+    @DeleteMapping("/{id}")
+    public int deleteBoard(@PathVariable long id){
+        return boardService.deleteBoard(id);
+    }
 }

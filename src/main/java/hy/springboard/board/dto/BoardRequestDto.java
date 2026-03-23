@@ -1,4 +1,4 @@
-package com.hy.springboard.dto;
+package hy.springboard.board.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

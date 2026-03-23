@@ -9,13 +9,36 @@
 <body>
 <div class="container">
 
-    <div class="title" th:text="${board.title}"></div>
-    <div class="writer" th:text="'작성자: ' + ${board.writer}"></div>
-    <div class="content" th:text="${board.content}"></div>
+    <div class="title" id="title"></div>
+    <div class="writer" id="writer"></div>
+    <div class="content" id="content"></div>
 
     <a href="/board" class="btn">목록으로</a>
-    <a th:href="@{/board/edit/{id}(id=${board.id})}" class="btn">수정</a>
+    <a id="editBtn" class="btn">수정</a>
 
 </div>
+
+<script>
+    function getBoardId() {
+        const path = window.location.pathname;
+        return path.split("/").pop();
+    }
+
+    async function loadBoard() {
+        const id = getBoardId();
+
+        const res = await fetch(`/api/boards/${id}`);
+        const board = await res.json();
+
+        document.getElementById("title").innerText = board.title;
+        document.getElementById("writer").innerText = "작성자: " + board.writer;
+        document.getElementById("content").innerText = board.content;
+
+        document.getElementById("editBtn").href = `/board/edit/${board.id}`;
+    }
+
+    window.onload = loadBoard;
+</script>
+
 </body>
 </html>

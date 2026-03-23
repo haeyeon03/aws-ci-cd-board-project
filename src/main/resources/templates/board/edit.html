@@ -11,24 +11,81 @@
 
     <h2>🛠 글 수정</h2>
 
-    <form th:action="@{/board/edit/{id}(id=${board.id})}" method="post">
-        <input type="hidden" name="id" th:value="${board.id}">
+    <input type="text" id="title" placeholder="제목">
+    <input type="text" id="writer" placeholder="작성자">
+    <textarea id="content" placeholder="내용"></textarea>
 
-        <input type="text" name="title" th:value="${board.title}" placeholder="제목">
-        <input type="text" name="writer" th:value="${board.writer}" placeholder="작성자">
-        <textarea name="content" th:text="${board.content}" placeholder="내용"></textarea>
-
-        <!-- 버튼 그룹 -->
-        <div style="display: flex; gap: 10px; margin-top: 10px;">
-            <button type="submit" class="btn">수정 완료</button>
-
-            <!-- 삭제 버튼을 같은 div 안으로 이동 -->
-            <form th:action="@{/board/delete/{id}(id=${board.id})}" method="post" style="margin: 0;">
-                <button type="submit" class="btn delete">삭제</button>
-            </form>
-        </div>
-    </form>
+    <div style="display: flex; gap: 10px; margin-top: 10px;">
+        <button onclick="updateBoard()" class="btn">수정 완료</button>
+        <button onclick="deleteBoard()" class="btn delete">삭제</button>
+    </div>
 
 </div>
+
+<script>
+    function getBoardId() {
+        return window.location.pathname.split("/").pop();
+    }
+
+    // 기존 데이터 불러오기
+    async function loadBoard() {
+        const id = getBoardId();
+
+        const res = await fetch(`/api/boards/${id}`);
+        const board = await res.json();
+
+        document.getElementById("title").value = board.title;
+        document.getElementById("writer").value = board.writer;
+        document.getElementById("content").value = board.content;
+    }
+
+    // 수정
+    async function updateBoard() {
+        const id = getBoardId();
+
+        const data = {
+            title: document.getElementById("title").value,
+            writer: document.getElementById("writer").value,
+            content: document.getElementById("content").value
+        };
+
+        const res = await fetch(`/api/boards/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (res.ok) {
+            alert("수정 완료하였습니다");
+            location.href = `/board/${id}`;
+        } else {
+            alert("수정 실패하였습니다");
+        }
+    }
+
+    // 삭제
+    async function deleteBoard() {
+        const id = getBoardId();
+
+        if (!confirm("진짜 삭제하시겠습니까?")) return;
+
+        const res = await fetch(`/api/boards/${id}`, {
+            method: "DELETE"
+        });
+
+        if (res.ok) {
+            alert("삭제 완료하였습니다");
+            location.href = "/board";
+        } else {
+            alert("삭제 실패하였습니다");
+        }
+    }
+
+    // 페이지 로드 시 실행
+    window.onload = loadBoard;
+</script>
+
 </body>
 </html>

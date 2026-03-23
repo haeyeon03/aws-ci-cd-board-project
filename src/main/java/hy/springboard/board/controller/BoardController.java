@@ -1,8 +1,8 @@
-package com.hy.springboard.controller;
+package hy.springboard.board.controller;
 
-import com.hy.springboard.dto.BoardRequestDto;
-import com.hy.springboard.dto.BoardResponseDto;
-import com.hy.springboard.service.BoardService;
+import hy.springboard.board.dto.BoardRequestDto;
+import hy.springboard.board.dto.BoardResponseDto;
+import hy.springboard.user.domain.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

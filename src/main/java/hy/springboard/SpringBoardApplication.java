@@ -1,4 +1,4 @@
-package com.hy.springboard;
+package hy.springboard;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

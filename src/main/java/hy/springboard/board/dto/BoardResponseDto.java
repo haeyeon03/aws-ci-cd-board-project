@@ -1,6 +1,6 @@
-package com.hy.springboard.dto;
+package hy.springboard.board.dto;
 
-import com.hy.springboard.entity.Board;
+import hy.springboard.user.domain.entity.Board;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

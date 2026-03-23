@@ -11,14 +11,38 @@
 
     <h2>✏ 글쓰기</h2>
 
-    <form action="/board/write" method="post">
-        <input type="text" name="title" placeholder="제목">
-        <input type="text" name="writer" placeholder="작성자">
-        <textarea name="content" placeholder="내용"></textarea>
+    <input type="text" id="title" placeholder="제목">
+    <input type="text" id="writer" placeholder="작성자">
+    <textarea id="content" placeholder="내용"></textarea>
 
-        <button type="submit" class="btn">작성</button>
-    </form>
+    <button onclick="createBoard()" class="btn">작성</button>
 
 </div>
+
+<script>
+    async function createBoard() {
+        const data = {
+            title: document.getElementById("title").value,
+            writer: document.getElementById("writer").value,
+            content: document.getElementById("content").value
+        };
+
+        const res = await fetch("/api/boards", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (res.ok) {
+            alert("작성 완료하였습니다.");
+            location.href = "/board";
+        } else {
+            alert("작성 실패하였습니다.");
+        }
+    }
+</script>
+
 </body>
 </html>

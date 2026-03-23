@@ -1,16 +1,15 @@
-package com.hy.springboard.service;
+package hy.springboard.user.domain.service;
 
-import com.hy.springboard.dto.BoardRequestDto;
-import com.hy.springboard.dto.BoardResponseDto;
-import com.hy.springboard.entity.Board;
-import com.hy.springboard.repository.BoardRepository;
+import hy.springboard.board.dto.BoardRequestDto;
+import hy.springboard.board.dto.BoardResponseDto;
+import hy.springboard.user.domain.entity.Board;
+import hy.springboard.user.domain.repository.BoardRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
